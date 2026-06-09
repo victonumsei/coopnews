@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f5f5f5;
+        font-family: Arial, sans-serif;
+      }
+
+      .carrossel {
+        width: 765px;
+        max-width: 90vw;
+        overflow: hidden;
+        border-radius: 24px;
+        position: relative;
+      }
+
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+        height: 500px;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+        font-size: 24px;
+        cursor: pointer;
+        transition: .2s;
+        z-index: 10;
+      }
+
+      .btn:hover {
+        background: #fff;
+      }
+
+      .prev {
+        left: 16px;
+      }
+
+      .next {
+        right: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="carrossel">
+
+      <button class="btn prev">&#10094;</button>
+
+      <div class="slides">
+
+        <div class="slide">
+          <img src="https://email-editor-production.s3.amazonaws.com/images/354715/coopercondia.jpeg" alt="Imagem 1">
+        </div>
+
+        <div class="slide">
+          <img src="https://email-editor-production.s3.amazonaws.com/images/354715/Cooperconcordia.jpeg" alt="Imagem 2">
+        </div>
+
+        <div class="slide">
+          <img src="https://email-editor-production.s3.amazonaws.com/images/354715/Cooperconcordia%202.jpeg" alt="Imagem 3">
+        </div>
+
+        <div class="slide">
+          <img src="https://email-editor-production.s3.amazonaws.com/images/354715/BETT%20BRASIL%201_1.jpeg" alt="Imagem 4">
+        </div>
+
+      </div>
+
+      <button class="btn next">&#10095;</button>
+
+    </div>
+
+    <script>
+      const slides = document.querySelector('.slides');
+      const totalSlides = document.querySelectorAll('.slide').length;
+
+      let indice = 0;
+
+      function atualizarSlide() {
+        slides.style.transform = `translateX(-${indice * 100}%)`;
+      }
+
+      document.querySelector('.next').addEventListener('click', () => {
+        indice++;
+
+        if (indice >= totalSlides) {
+          indice = 0;
+        }
+
+        atualizarSlide();
+      });
+
+      document.querySelector('.prev').addEventListener('click', () => {
+        indice--;
+
+        if (indice < 0) {
+          indice = totalSlides - 1;
+        }
+
+        atualizarSlide();
+      });
+    </script>
+
+  </body>
+
+</html>
